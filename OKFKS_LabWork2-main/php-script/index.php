@@ -1,47 +1,3 @@
-# ОКФКС. Лабораторная работа №2
-
-# Создание новой базы данных
-
-СУБД — MySQL Workbench
-
-- Скрипт для создания базы данных
-
-```
-CREATE DATABASE lab_security;
-
-USE lab_security;
-
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE comments (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255) NOT NULL,
-    comment TEXT NOT NULL
-);
-
--- Добавляем пользователя для тестирования
-INSERT INTO users (username, password, email) VALUES ('admin', 'password', 'example@mail.ru');
-
-INSERT INTO users (username, password, email) VALUES ('user', 'password', 'other@mail.ru');
-
-
-CREATE USER 'lab_security'@'localhost' identified with mysql_native_password BY 'lab_security';
-
-GRANT ALL PRIVILEGES ON lab_security.* TO 'lab_security'@'localhost';
-```
-
-Скриншот созданной базы данных
-
-<img width="165" height="115" alt="image" src="https://github.com/user-attachments/assets/55ba1ab2-2fd2-4ad6-90c4-0f1f41e66be6" />
-
-# Код с уязвимостями к SQL-инъекцией
-
-```
 <?php
 session_start();
 
@@ -183,22 +139,3 @@ $comments_result = $conn->query("SELECT * FROM comments");
 
 </body>
 </html>
-```
-# Скриншот приложения
-
-<img width="1437" height="574" alt="image" src="https://github.com/user-attachments/assets/a3509f06-85b4-405b-ac67-b474e258b717" />
-
-# Тестирование приложения
-| Действие | Результат |
-|----------|-----------|
-| Выполнить авторизацию без учетных данных ``` Логин: ' OR '1'='1 Пароль: ' OR '1'='1 ```| <img width="853" height="480" alt="image" src="https://github.com/user-attachments/assets/39c3b71c-c822-4ada-b73c-b68089e2597a" />|
-|Вход по учётной записью админа без пароля ``` Логин: admin'-- Пароль: 111 ``` |<img width="617" height="283" alt="image" src="https://github.com/user-attachments/assets/29191747-538f-4208-83a1-91f68b05cf5c" />|
-|Вывести учетные данные пользователей при помощи запроса  ```'), ('dump', (SELECT GROUP_CONCAT(username, ':', password, ':', email SEPARATOR '; ') FROM users)) -- ```|<img width="867" height="347" alt="image" src="https://github.com/user-attachments/assets/2dfe929b-3df1-4a26-a4d4-f94718baf487" />|
-|Вставить в поле ввода "Комментарий" скрипт <img width="1008" height="304" alt="image" src="https://github.com/user-attachments/assets/6a39e164-ede3-47b7-9e2b-357d7444b685" /> | <img width="1061" height="436" alt="image" src="https://github.com/user-attachments/assets/1467eca9-880b-4ce3-bf8b-ff49d707fc00" />|
-|Смена admin email на "other@mail.ru" под учётной записью user |<img width="597" height="303" alt="image" src="https://github.com/user-attachments/assets/a714b7f1-3d0e-48ee-963e-154e52efaa24" />|
-|Публикация комментария под несуществующим пользователем в БД |<img width="484" height="348" alt="image" src="https://github.com/user-attachments/assets/7494bf4b-6a4f-4f03-9076-a1f327b97b8b" /> |
-
-<a href="https://github.com/amadesya/OKFKS_LabWork2/blob/main/php-script/task5.php" target="_blank">Задание 5</a>
-
- 
-
