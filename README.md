@@ -201,6 +201,7 @@ $comments_result = $conn->query("SELECT * FROM comments");
 
 
 5 Задание 
+
 <?php
 session_start();
 
@@ -290,7 +291,6 @@ $comments_result = $conn->query("SELECT username, comment FROM comments");
             <a href="?page=logout">Выйти (<?php echo htmlspecialchars($_SESSION['username']); ?>)</a>
         <?php endif; ?>
     </nav>
-
     <hr>
 
     <?php if ($page === 'home'): ?>
@@ -346,6 +346,3 @@ $comments_result = $conn->query("SELECT username, comment FROM comments");
     <?php endif; ?>
 </body>
 </html>
-
- 
-
