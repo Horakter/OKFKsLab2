@@ -199,8 +199,8 @@ $comments_result = $conn->query("SELECT * FROM comments");
 |Публикация комментария под несуществующим пользователем в БД |<img width="484" height="348" alt="image" src="https://github.com/user-attachments/assets/7494bf4b-6a4f-4f03-9076-a1f327b97b8b" /> |
 
 
-
 5 Задание 
+
 ```
 <?php
 session_start();
@@ -291,6 +291,7 @@ $comments_result = $conn->query("SELECT username, comment FROM comments");
             <a href="?page=logout">Выйти (<?php echo htmlspecialchars($_SESSION['username']); ?>)</a>
         <?php endif; ?>
     </nav>
+
     <hr>
 
     <?php if ($page === 'home'): ?>
@@ -346,3 +347,4 @@ $comments_result = $conn->query("SELECT username, comment FROM comments");
     <?php endif; ?>
 </body>
 </html>
+```
