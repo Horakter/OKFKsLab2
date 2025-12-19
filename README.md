@@ -201,7 +201,7 @@ $comments_result = $conn->query("SELECT * FROM comments");
 
 
 5 Задание 
-
+```
 <?php
 session_start();
 
